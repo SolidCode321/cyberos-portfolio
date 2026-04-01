@@ -210,3 +210,65 @@
     transform: scale(0.92);
   }
 }
+
+/* === Mobile Overrides === */
+@media (max-width: 768px) {
+  .window {
+    inset: 28px 0 48px 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .window-titlebar {
+    height: 48px;
+    padding: 0 16px;
+    background: var(--bg-surface-solid);
+    cursor: default !important;
+  }
+
+  .window-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .window-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Hide minimize/maximize on mobile */
+  .win-minimize, .win-maximize {
+    display: none !important;
+  }
+
+  .win-close {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+  }
+
+  .win-close svg {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+  }
+
+  .window-maximized {
+    inset: 28px 0 48px 0 !important;
+  }
+  
+  /* Disable dragging on mobile */
+  .window-titlebar {
+    pointer-events: auto;
+  }
+  
+  .window-dragging {
+    opacity: 1;
+    transform: none !important;
+  }
+}

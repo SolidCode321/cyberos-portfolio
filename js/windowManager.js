@@ -12,6 +12,11 @@ class WindowManager {
     this.desktopEl = document.getElementById('desktop');
     this.taskbarAppsEl = document.getElementById('taskbar-apps');
     this.setupGlobalEvents();
+    this.setupMobileNav();
+  }
+
+  isMobile() {
+    return window.innerWidth <= 768;
   }
 
   setupGlobalEvents() {
@@ -44,11 +49,17 @@ class WindowManager {
     height = height || 500;
 
     // Calculate position (cascading)
-    const maxX = window.innerWidth - width - 20;
-    const maxY = window.innerHeight - height - 70;
-    const x = Math.min(80 + this.cascadeOffset * 30, maxX);
-    const y = Math.min(60 + this.cascadeOffset * 30, maxY);
-    this.cascadeOffset = (this.cascadeOffset + 1) % 8;
+    let x, y;
+    if (this.isMobile()) {
+      x = 0;
+      y = 0;
+    } else {
+      const maxX = window.innerWidth - width - 20;
+      const maxY = window.innerHeight - height - 70;
+      x = Math.min(80 + this.cascadeOffset * 30, maxX);
+      y = Math.min(60 + this.cascadeOffset * 30, maxY);
+      this.cascadeOffset = (this.cascadeOffset + 1) % 8;
+    }
 
     // Create window element
     const winEl = document.createElement('div');
@@ -142,6 +153,7 @@ class WindowManager {
     let startX, startY, origX, origY;
 
     const onMouseDown = (e) => {
+      if (this.isMobile()) return; // Disable drag on mobile
       if (e.target.closest('.window-controls')) return;
       const win = this.windows.get(id);
       if (win.isMaximized) return;
@@ -299,5 +311,44 @@ class WindowManager {
   removeTaskbarButton(id) {
     const btn = document.querySelector(`.taskbar-btn[data-win-id="${id}"]`);
     if (btn) btn.remove();
+  }
+
+  setupMobileNav() {
+    const backBtn = document.getElementById('nav-back');
+    const homeBtn = document.getElementById('nav-home');
+    const recentsBtn = document.getElementById('nav-recents');
+
+    if (backBtn) {
+      backBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (this.activeWindowId) {
+          this.closeWindow(this.activeWindowId);
+        }
+      });
+    }
+
+    if (homeBtn) {
+      homeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Minimize all windows and show desktop/app drawer
+        this.windows.forEach((win, id) => {
+          this.minimizeWindow(id);
+        });
+        // Toggle app drawer (Start Menu)
+        const startMenu = document.getElementById('start-menu');
+        if (startMenu) startMenu.classList.toggle('visible');
+      });
+    }
+
+    if (recentsBtn) {
+      recentsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Simple switcher: Restore the last minimized window or cycle
+        const minimized = Array.from(this.windows.entries()).filter(([_, w]) => w.isMinimized);
+        if (minimized.length > 0) {
+          this.restoreWindow(minimized[0][0]);
+        }
+      });
+    }
   }
 }

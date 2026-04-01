@@ -144,7 +144,14 @@ class BootSequence {
     // Show welcome hint after a short delay
     setTimeout(() => {
       const hint = document.getElementById('welcome-hint');
-      if (hint) {
+      const hintBody = hint?.querySelector('.welcome-hint-body');
+      
+      if (hint && hintBody) {
+        // Dynamic hint for mobile
+        if (window.innerWidth <= 768) {
+          hintBody.innerHTML = 'Welcome to CyberOS! <b>Tap</b> icons to explore my work, or use the <b>Home</b> button for more. Try the terminal for a full experience.';
+        }
+
         hint.classList.add('visible');
         // Auto-hide after 10 seconds or on first click
         const dismiss = () => {
@@ -187,13 +194,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateClock() {
   const clockEl = document.getElementById('taskbar-clock');
-  if (!clockEl) return;
+  const statusClockEl = document.getElementById('status-clock');
+  
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
   const mins = String(now.getMinutes()).padStart(2, '0');
-  const month = now.toLocaleString('default', { month: 'short' });
-  const day = now.getDate();
-  clockEl.textContent = `${hours}:${mins}  ${month} ${day}`;
+  
+  if (clockEl) {
+    const month = now.toLocaleString('default', { month: 'short' });
+    const day = now.getDate();
+    clockEl.textContent = `${hours}:${mins}  ${month} ${day}`;
+  }
+  
+  if (statusClockEl) {
+    statusClockEl.textContent = `${hours}:${mins}`;
+  }
 }
 
 function setupStartMenu(wm, fs) {

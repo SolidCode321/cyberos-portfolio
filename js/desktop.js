@@ -10,6 +10,7 @@ class Desktop {
     this.selectedIcon = null;
     this.iconsEl = document.getElementById('desktop-icons');
     this.contextMenu = document.getElementById('context-menu');
+    this.isMobile = () => window.innerWidth <= 768;
 
     this.desktopItems = [
       { id: 'folder-skills', label: 'Skills', icon: this.folderSvg('#00ff88'), type: 'folder', path: '/home/guest/Desktop/Skills', title: 'Technical competencies & tools' },
@@ -45,14 +46,19 @@ class Desktop {
         <span class="desktop-icon-label">${item.label}</span>
       `;
 
-      // Single click to select
+      // Single click to select (or open on mobile)
       iconEl.addEventListener('click', (e) => {
         e.stopPropagation();
         this.selectIcon(iconEl);
+        
+        if (this.isMobile()) {
+          this.openItem(item);
+        }
       });
 
-      // Double click to open
+      // Double click to open (desktop only)
       iconEl.addEventListener('dblclick', (e) => {
+        if (this.isMobile()) return;
         e.stopPropagation();
         this.openItem(item);
       });

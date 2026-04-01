@@ -432,6 +432,156 @@ html, body {
   font-style: italic;
 }
 
+/* === Status Bar (Mobile) === */
+#status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.4);
+  display: none; /* Desktop hidden */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 100000;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.status-icon {
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+}
+
+/* === Android Navigation Bar (Mobile) === */
+#android-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: #000;
+  display: none; /* Desktop hidden */
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100000;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  opacity: 0.7;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.nav-btn:active {
+  opacity: 1;
+}
+
+/* === Mobile Overrides === */
+@media (max-width: 768px) {
+  #desktop {
+    top: 28px; /* Room for status bar */
+    bottom: 48px; /* Room for nav bar */
+  }
+
+  #taskbar {
+    display: none !important;
+  }
+
+  #status-bar {
+    display: flex;
+  }
+
+  #android-nav {
+    display: flex;
+  }
+
+  .desktop-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    padding: 10px;
+    overflow-y: auto;
+  }
+
+  .desktop-icon {
+    width: 25%;
+    min-width: 80px;
+    margin-bottom: 16px;
+  }
+
+  .desktop-icon-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .desktop-icon-label {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+
+  /* Full Screen App Drawer */
+  #start-menu {
+    position: fixed;
+    inset: 28px 0 48px 0 !important;
+    width: 100% !important;
+    border-radius: 0;
+    background: rgba(10, 14, 23, 0.98);
+    padding: 24px 16px;
+    display: none;
+    flex-direction: column;
+  }
+
+  #start-menu.visible {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .start-menu-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+  }
+
+  .start-item {
+    padding: 16px;
+    font-size: 16px;
+    gap: 16px;
+    border-radius: 12px;
+  }
+
+  .start-item-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Hide Welcome Hint on very small screens or reposition */
+  #welcome-hint {
+    left: 16px;
+    right: 16px;
+    bottom: 64px;
+    max-width: none;
+  }
+}
+
 /* === Welcome Hint Notification === */
 #welcome-hint {
   position: fixed;
