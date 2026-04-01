@@ -1,0 +1,259 @@
+/* ============================================================
+   Animations CSS — CyberOS Portfolio
+   Boot sequence, transitions, hover effects
+   ============================================================ */
+
+/* === Boot Screen === */
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  z-index: 99999;
+  padding: 40px;
+  overflow: hidden;
+}
+
+#boot-log {
+  flex: 1;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #b0b0b0;
+}
+
+.boot-line {
+  white-space: pre;
+  animation: bootLineIn 50ms ease;
+}
+
+.boot-ok {
+  color: #00ff88;
+  font-weight: 600;
+}
+
+.boot-progress {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.boot-skip-hint {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #444;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes bootLineIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Login Screen === */
+#login-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.login-logo {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-green);
+  margin-bottom: 40px;
+  line-height: 1.2;
+  white-space: pre;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.login-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(0, 255, 136, 0.1);
+  border: 2px solid var(--accent-green);
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--accent-green);
+  animation: avatarGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes avatarGlow {
+  from { box-shadow: 0 0 20px rgba(0, 255, 136, 0.15); }
+  to { box-shadow: 0 0 40px rgba(0, 255, 136, 0.3); }
+}
+
+.login-username-label {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.login-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  width: 280px;
+}
+
+.login-field-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  width: 80px;
+  text-align: right;
+}
+
+.login-field-value {
+  flex: 1;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent-green);
+  min-height: 36px;
+}
+
+#login-status {
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent-green);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#login-status.visible {
+  opacity: 1;
+}
+
+/* === Fade Transitions === */
+.fade-out {
+  animation: fadeOut 400ms ease forwards;
+}
+
+.fade-in {
+  animation: fadeIn 500ms ease forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* === Blink Animation === */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* === Desktop Icon Hover Effects === */
+.desktop-icon {
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.desktop-icon:active {
+  transform: scale(0.95);
+}
+
+/* === Taskbar Button Hover === */
+.taskbar-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.taskbar-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent-green);
+  border-radius: 2px;
+  transition: width var(--transition-fast);
+}
+
+.taskbar-btn.active::after {
+  width: 20px;
+}
+
+/* === Subtle glitch effect on hover (for fun) === */
+.desktop-icon-img:hover {
+  animation: iconGlitch 0.3s ease;
+}
+
+@keyframes iconGlitch {
+  0% { filter: drop-shadow(0 2px 8px rgba(0, 255, 136, 0.2)); }
+  25% { filter: drop-shadow(2px 0 8px rgba(255, 0, 136, 0.3)) drop-shadow(-2px 0 8px rgba(0, 136, 255, 0.3)); }
+  50% { filter: drop-shadow(-1px 1px 8px rgba(0, 255, 136, 0.4)); }
+  100% { filter: drop-shadow(0 2px 8px rgba(0, 255, 136, 0.2)); }
+}
+
+/* === Explorer Item Hover === */
+.explorer-item {
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.explorer-item:active {
+  transform: scale(0.95);
+}
+
+/* === Tag Animation === */
+.about-tags .tag {
+  animation: tagFade 0.3s ease forwards;
+  opacity: 0;
+}
+
+.about-tags .tag:nth-child(1) { animation-delay: 0.1s; }
+.about-tags .tag:nth-child(2) { animation-delay: 0.15s; }
+.about-tags .tag:nth-child(3) { animation-delay: 0.2s; }
+.about-tags .tag:nth-child(4) { animation-delay: 0.25s; }
+.about-tags .tag:nth-child(5) { animation-delay: 0.3s; }
+.about-tags .tag:nth-child(6) { animation-delay: 0.35s; }
+
+@keyframes tagFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Loading Spinner (for future use) === */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-subtle);
+  border-top-color: var(--accent-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

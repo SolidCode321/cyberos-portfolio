@@ -1,0 +1,212 @@
+/* ============================================================
+   Windows CSS — CyberOS Portfolio
+   Window chrome, dragging, glassmorphism, states
+   ============================================================ */
+
+/* === Window Container === */
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: rgba(17, 24, 39, 0.92);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  min-width: 300px;
+  min-height: 200px;
+  transition: box-shadow var(--transition-fast);
+}
+
+.window.window-active {
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(0, 255, 136, 0.08);
+}
+
+/* === Title Bar === */
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 12px;
+  background: rgba(10, 14, 23, 0.6);
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: default;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  overflow: hidden;
+}
+
+.window-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  line-height: 0;
+}
+
+.window-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.window-active .window-icon {
+  color: var(--accent-green);
+}
+
+.window-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-active .window-title {
+  color: var(--text-primary);
+}
+
+/* === Window Controls === */
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.win-ctrl {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.win-ctrl svg {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.window-controls:hover .win-ctrl svg {
+  opacity: 1;
+}
+
+.win-minimize {
+  background: var(--accent-yellow);
+}
+
+.win-minimize:hover {
+  background: #e5a829;
+}
+
+.win-minimize svg {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.win-maximize {
+  background: #28c840;
+}
+
+.win-maximize:hover {
+  background: #20b538;
+}
+
+.win-maximize svg {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.win-close {
+  background: var(--accent-red);
+}
+
+.win-close:hover {
+  background: #e5453c;
+}
+
+.win-close svg {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* === Window Body === */
+.window-body {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* === Window States === */
+.window-dragging {
+  opacity: 0.92;
+  cursor: grabbing !important;
+}
+
+.window-dragging .window-titlebar {
+  cursor: grabbing !important;
+}
+
+.window-minimized {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9) translateY(20px);
+  transition: all 200ms ease;
+}
+
+.window-maximized {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: calc(100vh - 36px) !important;
+  border-radius: 0;
+  transition: all 200ms ease;
+}
+
+.window-maximized .window-titlebar {
+  border-radius: 0;
+}
+
+/* === Window Animations === */
+.window-opening {
+  animation: windowOpen 250ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.window-closing {
+  animation: windowClose 200ms ease forwards;
+  pointer-events: none;
+}
+
+@keyframes windowOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes windowClose {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
