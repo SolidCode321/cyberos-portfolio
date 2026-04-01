@@ -157,8 +157,12 @@ class Desktop {
 
   folderSvg(color = '#00ff88') {
     return `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6 12C6 10.8954 6.89543 10 8 10H18L22 14H40C41.1046 14 42 14.8954 42 16V36C42 37.1046 41.1046 38 40 38H8C6.89543 38 6 37.1046 6 36V12Z" fill="${color}" opacity="0.25"/>
-      <path d="M6 12C6 10.8954 6.89543 10 8 10H18L22 14H40C41.1046 14 42 14.8954 42 16V36C42 37.1046 41.1046 38 40 38H8C6.89543 38 6 37.1046 6 36V12Z" stroke="${color}" stroke-width="1.5"/>
+      <!-- Background/Main Folder Body -->
+      <path d="M6 16C6 14.8954 6.89543 14 8 14H40C41.1046 14 42 14.8954 42 16V36C42 37.1046 41.1046 38 40 38H8C6.89543 38 6 37.1046 6 36V16Z" fill="${color}" />
+      <!-- Top Tab -->
+      <path d="M6 12C6 10.8954 6.89543 10 8 10H18L22 14H6V12Z" fill="${color}" opacity="0.8" />
+      <!-- Outline for Sharpness -->
+      <path d="M6 12C6 10.8954 6.89543 10 8 10H18L22 14H40C41.1046 14 42 14.8954 42 16V36C42 37.1046 41.1046 38 40 38H8C6.89543 38 6 37.1046 6 36V12Z" stroke="rgba(0,0,0,0.2)" stroke-width="0.5"/>
     </svg>`;
   }
 
