@@ -18,24 +18,24 @@ class BootSequence {
 
     this.bootMessages = [
       { text: 'CyberOS BIOS v4.2.0 — Initializing...', delay: 0 },
-      { text: 'CPU: Neural Engine v4 @ 4.20GHz', delay: 100 },
-      { text: 'Memory: 32768MB DDR5 ECC ... OK', delay: 80 },
-      { text: 'Storage: 2TB NVMe SSD (encrypted) ... OK', delay: 80 },
-      { text: '', delay: 50 },
-      { text: 'Loading security modules...', delay: 150 },
-      { text: '  ├── Firewall ................. [  OK  ]', delay: 100 },
-      { text: '  ├── IDS/IPS .................. [  OK  ]', delay: 80 },
-      { text: '  ├── Encryption Engine ........ [  OK  ]', delay: 80 },
-      { text: '  ├── Integrity Monitor ........ [  OK  ]', delay: 80 },
-      { text: '  └── Threat Intelligence ...... [  OK  ]', delay: 80 },
-      { text: '', delay: 50 },
-      { text: 'Mounting encrypted filesystem ... OK', delay: 120 },
-      { text: 'Starting network services ... OK', delay: 100 },
-      { text: 'Initializing desktop environment ...', delay: 150 },
-      { text: '', delay: 100 },
-      { text: '██████████████████████████████ 100%', delay: 200 },
-      { text: '', delay: 100 },
-      { text: 'System ready. Starting login...', delay: 300 },
+      { text: 'CPU: Neural Engine v4 @ 4.20GHz', delay: 80 },
+      { text: 'Memory: 32768MB DDR5 ECC ... OK', delay: 60 },
+      { text: 'Storage: 2TB NVMe SSD (encrypted) ... OK', delay: 60 },
+      { text: '', delay: 40 },
+      { text: 'Loading security modules...', delay: 100 },
+      { text: '  ├── Firewall ................. [  OK  ]', delay: 60 },
+      { text: '  ├── IDS/IPS .................. [  OK  ]', delay: 50 },
+      { text: '  ├── Encryption Engine ........ [  OK  ]', delay: 50 },
+      { text: '  ├── Integrity Monitor ........ [  OK  ]', delay: 50 },
+      { text: '  └── Threat Intelligence ...... [  OK  ]', delay: 50 },
+      { text: '', delay: 40 },
+      { text: 'Mounting encrypted filesystem ... OK', delay: 80 },
+      { text: 'Starting network services ... OK', delay: 70 },
+      { text: 'Initializing desktop environment ...', delay: 100 },
+      { text: '', delay: 60 },
+      { text: '██████████████████████████████ 100%', delay: 150 },
+      { text: '', delay: 80 },
+      { text: 'System ready. Starting login...', delay: 200 },
     ];
 
     this.start();
@@ -62,20 +62,20 @@ class BootSequence {
     if (skipped) return;
 
     // Transition to login screen
-    await this.delay(500);
+    await this.delay(400);
     if (skipped) return;
     this.showLogin();
 
     // Auto-type username
-    await this.delay(600);
+    await this.delay(500);
     if (skipped) return;
     await this.typeText('login-username', 'guest');
 
-    await this.delay(400);
+    await this.delay(300);
     if (skipped) return;
     await this.typeText('login-password', '••••••••');
 
-    await this.delay(600);
+    await this.delay(400);
     if (skipped) return;
 
     // Show "Authenticated" message

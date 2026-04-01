@@ -257,3 +257,65 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* === Mobile Overrides for Boot & Login === */
+@media (max-width: 768px) {
+  #boot-screen {
+    padding: 16px;
+  }
+
+  #boot-log {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .boot-line {
+    white-space: pre-wrap; /* Allow wrapping if needed on narrow screens */
+    margin-bottom: 2px;
+  }
+
+  .boot-skip-hint {
+    bottom: 16px;
+    right: 16px;
+    font-size: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .login-logo {
+    font-size: 7px; /* Shrink ASCII art */
+    margin-bottom: 20px;
+    transform: scale(1.1); /* Slight boost after shrinking font-size */
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .login-avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 12px;
+  }
+
+  .login-username-label {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .login-field {
+    width: 240px;
+    gap: 4px;
+  }
+
+  .login-field-label {
+    width: 50px;
+    font-size: 11px;
+  }
+
+  .login-field-value {
+    font-size: 11px;
+    padding: 6px 10px;
+    min-height: 32px;
+  }
+}
