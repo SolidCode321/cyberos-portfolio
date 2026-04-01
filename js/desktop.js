@@ -12,15 +12,15 @@ class Desktop {
     this.contextMenu = document.getElementById('context-menu');
 
     this.desktopItems = [
-      { id: 'folder-skills', label: 'Skills', icon: this.folderSvg('#00ff88'), type: 'folder', path: '/home/guest/Desktop/Skills' },
-      { id: 'folder-projects', label: 'Projects', icon: this.folderSvg('#00b4d8'), type: 'folder', path: '/home/guest/Desktop/Projects' },
-      { id: 'folder-experience', label: 'Experience', icon: this.folderSvg('#a855f7'), type: 'folder', path: '/home/guest/Desktop/Experience' },
-      { id: 'folder-certs', label: 'Certifications', icon: this.folderSvg('#ff6b35'), type: 'folder', path: '/home/guest/Desktop/Certifications' },
-      { id: 'app-terminal', label: 'Terminal', icon: this.terminalSvg(), type: 'app', appId: 'terminal' },
-      { id: 'app-browser', label: 'Browser', icon: this.browserSvg(), type: 'app', appId: 'browser' },
-      { id: 'app-writeups', label: 'Writeups', icon: this.writeupsSvg(), type: 'app', appId: 'writeups' },
-      { id: 'file-readme', label: 'README.txt', icon: this.fileSvg(), type: 'file', path: '/home/guest/Desktop/README.txt' },
-      { id: 'app-about', label: 'About Me', icon: this.aboutSvg(), type: 'app', appId: 'about' },
+      { id: 'folder-skills', label: 'Skills', icon: this.folderSvg('#00ff88'), type: 'folder', path: '/home/guest/Desktop/Skills', title: 'Technical competencies & tools' },
+      { id: 'folder-projects', label: 'Projects', icon: this.folderSvg('#00b4d8'), type: 'folder', path: '/home/guest/Desktop/Projects', title: 'Security research & development projects' },
+      { id: 'folder-experience', label: 'Experience', icon: this.folderSvg('#a855f7'), type: 'folder', path: '/home/guest/Desktop/Experience', title: 'Professional work history' },
+      { id: 'folder-certs', label: 'Certifications', icon: this.folderSvg('#ff6b35'), type: 'folder', path: '/home/guest/Desktop/Certifications', title: 'Professional licenses & certifications' },
+      { id: 'app-terminal', label: 'Terminal', icon: this.terminalSvg(), type: 'app', appId: 'terminal', title: 'Command-line interface (try "help")' },
+      { id: 'app-browser', label: 'Browser', icon: this.browserSvg(), type: 'app', appId: 'browser', title: 'Web browser — AlexanderDaniel on LinkedIn' },
+      { id: 'app-writeups', label: 'Writeups', icon: this.writeupsSvg(), type: 'app', appId: 'writeups', title: 'Documented security research & HTB solves' },
+      { id: 'file-readme', label: 'README.txt', icon: this.fileSvg(), type: 'file', path: '/home/guest/Desktop/README.txt', title: 'Essential system information' },
+      { id: 'app-about', label: 'About Me', icon: this.aboutSvg(), type: 'app', appId: 'about', title: 'Professional overview & social links' },
     ];
 
     this.init();
@@ -39,6 +39,7 @@ class Desktop {
       iconEl.className = 'desktop-icon';
       iconEl.id = item.id;
       iconEl.dataset.type = item.type;
+      iconEl.title = item.title;
       iconEl.innerHTML = `
         <div class="desktop-icon-img">${item.icon}</div>
         <span class="desktop-icon-label">${item.label}</span>

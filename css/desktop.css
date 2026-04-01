@@ -58,7 +58,7 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 36px;
+  bottom: 44px;
   background-image: url('../assets/wallpaper.png');
   background-size: cover;
   background-position: center;
@@ -138,7 +138,7 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 36px;
+  height: 44px;
   background: #0d0d0d;
   border-top: 1px solid #1a1a1a;
   display: flex;
@@ -156,11 +156,11 @@ html, body {
 
 /* Start Button — Kali App Menu */
 #start-btn {
-  width: 38px;
-  height: 36px;
+  height: 44px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
   background: transparent;
   border: none;
   border-right: 1px solid #1a1a1a;
@@ -168,7 +168,9 @@ html, body {
   cursor: pointer;
   transition: background var(--transition-fast);
   flex-shrink: 0;
-  padding: 0;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 500;
 }
 
 #start-btn svg {
@@ -187,7 +189,7 @@ html, body {
 /* Taskbar Separator */
 .taskbar-separator {
   width: 1px;
-  height: 20px;
+  height: 28px;
   background: #222;
   margin: 0 2px;
   flex-shrink: 0;
@@ -295,7 +297,7 @@ html, body {
 /* === Start Menu === */
 #start-menu {
   position: fixed;
-  bottom: 42px;
+  bottom: 52px;
   left: 8px;
   width: 260px;
   background: rgba(17, 24, 39, 0.95);
@@ -427,5 +429,65 @@ html, body {
   font-size: 10px;
   color: var(--text-dim);
   padding: 6px 10px;
+  font-style: italic;
+}
+
+/* === Welcome Hint Notification === */
+#welcome-hint {
+  position: fixed;
+  bottom: 56px;
+  right: 16px;
+  max-width: 320px;
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  z-index: 10002;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+}
+
+#welcome-hint.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.welcome-hint-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-green);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.welcome-hint-body {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.welcome-hint-body kbd {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-primary);
+}
+
+.welcome-hint-dismiss {
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-dim);
   font-style: italic;
 }

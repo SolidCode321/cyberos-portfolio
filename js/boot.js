@@ -7,6 +7,10 @@ class BootSequence {
   constructor(onComplete) {
     this.onComplete = onComplete;
     this.bootScreen = document.getElementById('boot-screen');
+    this.bootScreen.innerHTML = `
+      <div id="boot-log"></div>
+      <div class="boot-skip-hint">Press any key or <b>click</b> to skip boot sequence</div>
+    `;
     this.bootLog = document.getElementById('boot-log');
     this.loginScreen = document.getElementById('login-screen');
     this.desktop = document.getElementById('desktop');
@@ -136,6 +140,21 @@ class BootSequence {
     // Show desktop
     this.desktop.classList.add('visible');
     this.taskbar.classList.add('visible');
+
+    // Show welcome hint after a short delay
+    setTimeout(() => {
+      const hint = document.getElementById('welcome-hint');
+      if (hint) {
+        hint.classList.add('visible');
+        // Auto-hide after 10 seconds or on first click
+        const dismiss = () => {
+          hint.classList.remove('visible');
+          document.removeEventListener('click', dismiss);
+        };
+        document.addEventListener('click', dismiss);
+        setTimeout(dismiss, 10000);
+      }
+    }, 1500);
 
     if (this.onComplete) this.onComplete();
   }
